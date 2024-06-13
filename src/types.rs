@@ -1,6 +1,6 @@
-use std::io::Write;
-use byteorder::WriteBytesExt;
 use byteorder::BigEndian;
+use byteorder::WriteBytesExt;
+use std::io::Write;
 
 pub const WINSIZE: usize = 32768;
 pub const CHUNK: usize = 16384;
@@ -11,7 +11,7 @@ pub enum CompressionMode {
     Gzip = 31,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct Point {
     pub inn: u64,
     pub out: u64,
@@ -30,7 +30,7 @@ impl Point {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct DeflateIndex {
     pub mode: i32,
     pub list: Vec<Point>,
@@ -63,18 +63,18 @@ impl DeflateIndex {
         self.list.push(point);
     }
 
-	pub fn serialize(&self, writer: &mut dyn Write) -> std::io::Result<()> {
-		writer.write_u64::<BigEndian>(self.length)?;
-		writer.write_i32::<BigEndian>(self.mode)?;
-		writer.write_i32::<BigEndian>(self.list.len() as i32)?;
-	
-		for point in &self.list {
-			writer.write_u64::<BigEndian>(point.inn)?;
-			writer.write_u64::<BigEndian>(point.out)?;
-			writer.write_u32::<BigEndian>(point.bits)?;
-			writer.write_all(&point.window)?;
-		}
-	
-		Ok(())
-	}
+    pub fn serialize(&self, writer: &mut dyn Write) -> std::io::Result<()> {
+        writer.write_u64::<BigEndian>(self.length)?;
+        writer.write_i32::<BigEndian>(self.mode)?;
+        writer.write_i32::<BigEndian>(self.list.len() as i32)?;
+
+        for point in &self.list {
+            writer.write_u64::<BigEndian>(point.inn)?;
+            writer.write_u64::<BigEndian>(point.out)?;
+            writer.write_u32::<BigEndian>(point.bits)?;
+            writer.write_all(&point.window)?;
+        }
+
+        Ok(())
+    }
 }

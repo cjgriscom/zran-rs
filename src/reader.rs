@@ -1,7 +1,7 @@
-use std::io::{self, Read, Seek, SeekFrom};
 use crate::pushback::PushbackReader;
 use crate::types::*;
 use crate::zran::extract_data;
+use std::io::{self, Read, Seek, SeekFrom};
 
 pub struct SeekableZLibReader<R: Read + Seek> {
     reader: PushbackReader<R>,

@@ -7,7 +7,10 @@ pub struct PushbackReader<R: Read + Seek> {
 
 impl<R: Read + Seek> PushbackReader<R> {
     pub fn new(inner: R) -> Self {
-        PushbackReader { inner, buffer: None }
+        PushbackReader {
+            inner,
+            buffer: None,
+        }
     }
 
     pub fn unread(&mut self, byte: u8) -> io::Result<()> {

@@ -13,7 +13,6 @@ rust-version = "1.75"
 opt-level = 1
 
 [dependencies]
-libc = "0.2"
-flate2 = "1.0"
-byteorder = "1.4"
-once_cell = "*"
+byteorder = "1.5"
+zlib-rs = { git = "https://github.com/memorysafety/zlib-rs", rev="e56ccabf9ebe9d9bbc3d25e22b58403aae4a14ee"  }
+libz-rs-sys = { git = "https://github.com/memorysafety/zlib-rs", rev="e56ccabf9ebe9d9bbc3d25e22b58403aae4a14ee"  }

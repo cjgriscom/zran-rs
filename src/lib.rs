@@ -1,8 +1,7 @@
 mod pushback;
-pub mod types;
-mod zlib;
-pub mod zran;
 pub mod reader;
+pub mod types;
+pub mod zran;
 
 #[cfg(test)]
 mod test;
