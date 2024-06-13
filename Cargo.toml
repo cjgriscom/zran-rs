@@ -1,0 +1,19 @@
+[package]
+name = "zran-rs"
+version = "0.0.1"
+edition = "2021"
+license = "Zlib"
+repository = "https://github.com/cjgriscom/zran-rs"
+homepage = "https://github.com/cjgriscom/zran-rs"
+readme = "./README.md"
+description = "Seekable zlib streams in pure Rust"
+rust-version = "1.75"
+
+[profile.dev]
+opt-level = 1
+
+[dependencies]
+libc = "0.2"
+flate2 = "1.0"
+byteorder = "1.4"
+once_cell = "*"
